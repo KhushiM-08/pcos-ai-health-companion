@@ -1,0 +1,147 @@
+Upgrade my existing React web app "PCOS AI Health Companion" into a complete women healthcare platform with clean, minimal UI (no glassmorphism).
+
+-----------------------------------
+1. FIX PROFILE NAME ISSUE (CRITICAL)
+-----------------------------------
+
+- During signup:
+  - Save user name using Firebase Auth (updateProfile → displayName)
+  - Store user data in Firestore (users/{uid})
+
+- During login/profile:
+  - Fetch user name from Firebase Auth or Firestore
+  - Remove hardcoded names
+
+- Ensure same name appears in:
+  - Sidebar
+  - Dashboard
+  - Profile page
+
+-----------------------------------
+2. ADD BLOG / LEARN PAGE (PCOS GUIDE)
+-----------------------------------
+
+Create page: "Learn"
+
+Include:
+- What is PCOS / PCOD
+- Difference
+- Symptoms
+- Causes
+- Risks
+- Treatment
+- Lifestyle management
+- When to consult doctor
+- Success stories
+
+UI:
+- Clean blog layout
+- Section cards
+- Good typography
+
+-----------------------------------
+3. ADD DOCTOR GUIDE PAGE
+-----------------------------------
+
+Explain:
+- Gynecologist
+- Endocrinologist
+- Nutritionist
+- Dermatologist
+
+-----------------------------------
+4. ADD DOCTOR CONSULTATION PAGE
+-----------------------------------
+
+- Doctor listing (cards):
+  name, specialization, experience, rating
+
+- Booking form:
+  date, time, issue
+
+- Save booking to Firebase
+
+-----------------------------------
+5. ADD HOSPITAL CONSULTATION PAGE
+-----------------------------------
+
+- Hospital list:
+  name, location, specialties, rating
+
+- Hospital details page
+
+- Booking system
+
+-----------------------------------
+6. ADD DIET (INDIAN VEGAN)
+-----------------------------------
+
+Affordable Indian foods:
+
+Breakfast:
+Poha, Upma, Oats, Sprouts, Besan chilla
+
+Lunch:
+Roti + sabzi, Dal + rice, Chana
+
+Dinner:
+Khichdi, light roti sabzi
+
+Snacks:
+Roasted chana, peanuts, fruits
+
+Drinks:
+Water, lemon water, herbal tea
+
+-----------------------------------
+7. UI / UX DESIGN (IMPORTANT)
+-----------------------------------
+
+Use clean healthcare design:
+
+Colors:
+Primary: #7C83FD
+Accent: #FBCFE8
+Background: #F9FAFB
+Cards: White (#FFFFFF)
+
+Design rules:
+- No glassmorphism
+- Solid white cards
+- Soft shadows (shadow-md)
+- Rounded corners (rounded-xl / rounded-2xl)
+- Clear spacing
+- Minimal layout
+
+-----------------------------------
+8. RESPONSIVENESS
+-----------------------------------
+
+- Mobile-first
+- Sidebar (desktop)
+- Bottom navigation (mobile)
+
+-----------------------------------
+9. NAVIGATION
+-----------------------------------
+
+Add:
+- Learn
+- Doctor Guide
+- Consult Doctor
+- Hospitals
+
+-----------------------------------
+10. FINAL
+-----------------------------------
+
+- Clean reusable components
+- Smooth navigation
+- Professional healthcare UI
+
+-----------------------------------
+
+Start with:
+1. Fix auth issue
+2. Build clean dashboard UI
+3. Add new pages step-by-step

@@ -1,0 +1,706 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: PCOS AI Health Companion API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: tracker
+    description: Daily health tracking
+  - name: symptoms
+    description: Symptom checking
+  - name: periods
+    description: Period cycle tracking
+  - name: recommendations
+    description: AI recommendations
+  - name: user
+    description: User profile and onboarding
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /user/profile:
+    get:
+      operationId: getUserProfile
+      tags: [user]
+      summary: Get user profile
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+        "404":
+          description: Profile not found
+    put:
+      operationId: updateUserProfile
+      tags: [user]
+      summary: Update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserProfileBody"
+      responses:
+        "200":
+          description: Updated profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+
+  /tracker/entries:
+    get:
+      operationId: getTrackerEntries
+      tags: [tracker]
+      summary: Get daily tracker entries
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+          description: ISO date string
+        - name: endDate
+          in: query
+          schema:
+            type: string
+          description: ISO date string
+      responses:
+        "200":
+          description: List of tracker entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrackerEntry"
+    post:
+      operationId: createTrackerEntry
+      tags: [tracker]
+      summary: Create a daily tracker entry
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTrackerEntryBody"
+      responses:
+        "201":
+          description: Created entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrackerEntry"
+
+  /tracker/entries/{id}:
+    patch:
+      operationId: updateTrackerEntry
+      tags: [tracker]
+      summary: Update a tracker entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateTrackerEntryBody"
+      responses:
+        "200":
+          description: Updated entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrackerEntry"
+
+  /tracker/summary:
+    get:
+      operationId: getTrackerSummary
+      tags: [tracker]
+      summary: Get health score and summary stats
+      responses:
+        "200":
+          description: Tracker summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TrackerSummary"
+
+  /symptoms/check:
+    post:
+      operationId: checkSymptoms
+      tags: [symptoms]
+      summary: Analyze symptoms and get risk level
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SymptomCheckBody"
+      responses:
+        "200":
+          description: Symptom analysis result
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SymptomCheckResult"
+
+  /symptoms/history:
+    get:
+      operationId: getSymptomHistory
+      tags: [symptoms]
+      summary: Get symptom check history
+      responses:
+        "200":
+          description: List of symptom checks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SymptomCheckResult"
+
+  /periods:
+    get:
+      operationId: getPeriods
+      tags: [periods]
+      summary: Get period cycle records
+      responses:
+        "200":
+          description: List of period records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PeriodEntry"
+    post:
+      operationId: createPeriod
+      tags: [periods]
+      summary: Log a period date/range
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePeriodBody"
+      responses:
+        "201":
+          description: Created period entry
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PeriodEntry"
+
+  /periods/{id}:
+    delete:
+      operationId: deletePeriod
+      tags: [periods]
+      summary: Delete a period entry
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /periods/analysis:
+    get:
+      operationId: getPeriodAnalysis
+      tags: [periods]
+      summary: Get cycle regularity analysis
+      responses:
+        "200":
+          description: Period cycle analysis
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PeriodAnalysis"
+
+  /recommendations:
+    get:
+      operationId: getRecommendations
+      tags: [recommendations]
+      summary: Get AI-generated health recommendations
+      responses:
+        "200":
+          description: List of recommendations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Recommendation"
+
+  /recommendations/alerts:
+    get:
+      operationId: getAlerts
+      tags: [recommendations]
+      summary: Get active health alerts
+      responses:
+        "200":
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Alert"
+
+  /reports/health-score-trend:
+    get:
+      operationId: getHealthScoreTrend
+      tags: [recommendations]
+      summary: Get health score trend over time
+      responses:
+        "200":
+          description: Health score trend data points
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HealthScorePoint"
+
+  /reports/symptom-trend:
+    get:
+      operationId: getSymptomTrend
+      tags: [recommendations]
+      summary: Get symptom trend over time
+      responses:
+        "200":
+          description: Symptom trend data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SymptomTrendPoint"
+
+  /chatbot/message:
+    post:
+      operationId: sendChatMessage
+      tags: [recommendations]
+      summary: Send a message to the PCOS AI chatbot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageBody"
+      responses:
+        "200":
+          description: Chatbot response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+        weight:
+          type: number
+        height:
+          type: number
+        cycleRegularity:
+          type: string
+          enum: [regular, irregular, unknown]
+        diagnosedWithPcos:
+          type: boolean
+        symptoms:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - age
+        - weight
+        - height
+        - cycleRegularity
+        - diagnosedWithPcos
+        - symptoms
+        - createdAt
+
+    UpdateUserProfileBody:
+      type: object
+      properties:
+        name:
+          type: string
+        age:
+          type: integer
+        weight:
+          type: number
+        height:
+          type: number
+        cycleRegularity:
+          type: string
+          enum: [regular, irregular, unknown]
+        diagnosedWithPcos:
+          type: boolean
+        symptoms:
+          type: array
+          items:
+            type: string
+
+    TrackerEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+        waterIntakeLiters:
+          type: number
+        exerciseMinutes:
+          type: integer
+        mood:
+          type: string
+          enum: [happy, neutral, sad]
+        symptoms:
+          type: array
+          items:
+            type: string
+        notes:
+          type: ["string", "null"]
+        healthScore:
+          type: integer
+        createdAt:
+          type: string
+      required:
+        - id
+        - date
+        - waterIntakeLiters
+        - exerciseMinutes
+        - mood
+        - symptoms
+        - healthScore
+        - createdAt
+
+    CreateTrackerEntryBody:
+      type: object
+      properties:
+        date:
+          type: string
+        waterIntakeLiters:
+          type: number
+        exerciseMinutes:
+          type: integer
+        mood:
+          type: string
+          enum: [happy, neutral, sad]
+        symptoms:
+          type: array
+          items:
+            type: string
+        notes:
+          type: ["string", "null"]
+      required:
+        - date
+        - waterIntakeLiters
+        - exerciseMinutes
+        - mood
+        - symptoms
+
+    UpdateTrackerEntryBody:
+      type: object
+      properties:
+        waterIntakeLiters:
+          type: number
+        exerciseMinutes:
+          type: integer
+        mood:
+          type: string
+          enum: [happy, neutral, sad]
+        symptoms:
+          type: array
+          items:
+            type: string
+        notes:
+          type: ["string", "null"]
+
+    TrackerSummary:
+      type: object
+      properties:
+        healthScore:
+          type: integer
+        avgWaterIntake:
+          type: number
+        avgExerciseMinutes:
+          type: number
+        dominantMood:
+          type: string
+        streak:
+          type: integer
+        totalEntriesThisMonth:
+          type: integer
+      required:
+        - healthScore
+        - avgWaterIntake
+        - avgExerciseMinutes
+        - dominantMood
+        - streak
+        - totalEntriesThisMonth
+
+    SymptomCheckBody:
+      type: object
+      properties:
+        irregularPeriods:
+          type: boolean
+        acne:
+          type: boolean
+        excessHairGrowth:
+          type: boolean
+        weightGain:
+          type: boolean
+        hairLoss:
+          type: boolean
+        fatigue:
+          type: boolean
+        moodSwings:
+          type: boolean
+        pelvicPain:
+          type: boolean
+      required:
+        - irregularPeriods
+        - acne
+        - excessHairGrowth
+        - weightGain
+        - hairLoss
+        - fatigue
+        - moodSwings
+        - pelvicPain
+
+    SymptomCheckResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        riskLevel:
+          type: string
+          enum: [low, medium, high]
+        score:
+          type: integer
+        suggestions:
+          type: array
+          items:
+            type: string
+        symptoms:
+          $ref: "#/components/schemas/SymptomCheckBody"
+        checkedAt:
+          type: string
+      required:
+        - id
+        - riskLevel
+        - score
+        - suggestions
+        - symptoms
+        - checkedAt
+
+    PeriodEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        startDate:
+          type: string
+        endDate:
+          type: ["string", "null"]
+        cycleLength:
+          type: ["integer", "null"]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - startDate
+        - createdAt
+
+    CreatePeriodBody:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+      required:
+        - startDate
+
+    PeriodAnalysis:
+      type: object
+      properties:
+        averageCycleLength:
+          type: ["number", "null"]
+        isRegular:
+          type: boolean
+        lastPeriodDate:
+          type: ["string", "null"]
+        predictedNextDate:
+          type: ["string", "null"]
+        totalCycles:
+          type: integer
+        irregularityNote:
+          type: ["string", "null"]
+      required:
+        - isRegular
+        - totalCycles
+
+    Recommendation:
+      type: object
+      properties:
+        id:
+          type: integer
+        category:
+          type: string
+          enum: [hydration, exercise, nutrition, mental_health, medical, sleep]
+        title:
+          type: string
+        description:
+          type: string
+        priority:
+          type: string
+          enum: [low, medium, high]
+        icon:
+          type: string
+      required:
+        - id
+        - category
+        - title
+        - description
+        - priority
+        - icon
+
+    Alert:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [missed_cycle, low_activity, low_hydration, high_symptoms, streak_reminder]
+        title:
+          type: string
+        message:
+          type: string
+        severity:
+          type: string
+          enum: [info, warning, danger]
+        createdAt:
+          type: string
+      required:
+        - id
+        - type
+        - title
+        - message
+        - severity
+        - createdAt
+
+    HealthScorePoint:
+      type: object
+      properties:
+        date:
+          type: string
+        score:
+          type: integer
+      required:
+        - date
+        - score
+
+    SymptomTrendPoint:
+      type: object
+      properties:
+        date:
+          type: string
+        symptomCount:
+          type: integer
+        riskLevel:
+          type: string
+      required:
+        - date
+        - symptomCount
+        - riskLevel
+
+    ChatMessageBody:
+      type: object
+      properties:
+        message:
+          type: string
+        conversationHistory:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChatMessage"
+      required:
+        - message
+
+    ChatMessage:
+      type: object
+      properties:
+        role:
+          type: string
+          enum: [user, assistant]
+        content:
+          type: string
+      required:
+        - role
+        - content
+
+    ChatResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        suggestions:
+          type: array
+          items:
+            type: string
+      required:
+        - message
+        - suggestions

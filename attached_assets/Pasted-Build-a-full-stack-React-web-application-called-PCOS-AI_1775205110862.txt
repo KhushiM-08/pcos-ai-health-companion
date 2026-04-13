@@ -1,0 +1,140 @@
+Build a full-stack React web application called "PCOS AI Health Companion".
+
+This is a women healthcare web app focused on PCOS/PCOD management. The app should help users track their health, detect symptoms, get AI-based recommendations, and visualize improvement over time.
+
+-----------------------------------
+CORE FEATURES TO IMPLEMENT
+-----------------------------------
+
+1. Authentication:
+- Signup and Login using Firebase Authentication (email/password)
+
+2. User Onboarding:
+- Collect basic health details:
+  age, weight, height, cycle regularity, symptoms
+
+3. Dashboard (Main Page):
+- Health Score (0–100)
+- AI Recommendation Card
+- Quick Actions (Log Data, Check Symptoms)
+- Charts showing progress
+- Recent activity summary
+
+4. Daily Tracker:
+- Track:
+  water intake
+  exercise
+  mood (happy, neutral, sad)
+  symptoms
+- Save data to Firebase Firestore
+
+5. Symptom Checker:
+- Multi-step form
+- Questions:
+  irregular periods, acne, hair growth, weight gain
+- Output:
+  Risk Level (Low / Medium / High)
+  Suggestions
+
+6. Period Tracker:
+- Calendar-based UI
+- Store cycle dates
+- Detect irregular cycles
+
+7. Reports & Analytics:
+- Use charts (Recharts)
+- Show:
+  health score trend
+  symptom trend
+  cycle pattern
+
+8. AI Recommendation System:
+- Rule-based AI using JavaScript:
+  - Low water → suggest hydration
+  - Low activity → suggest exercise
+  - Sad mood → suggest meditation
+
+9. AI Chatbot:
+- Chat interface
+- Answer basic questions about PCOS, diet, exercise
+- Use simple rule-based responses
+
+10. Alerts System:
+- Show alerts like:
+  missed cycle
+  low activity
+  low hydration
+
+-----------------------------------
+TECH STACK
+-----------------------------------
+- React (frontend)
+- Firebase (Auth + Firestore)
+- Tailwind CSS (styling)
+- Recharts (charts)
+- Framer Motion (optional animations)
+
+-----------------------------------
+UI / UX DESIGN REQUIREMENTS
+-----------------------------------
+
+Design a clean, modern, feminine healthcare UI with soft pastel colors.
+
+Use this color palette:
+
+Primary: #7C83FD (Soft Indigo)
+Secondary: #A5B4FC (Light Indigo)
+Accent: #FBCFE8 (Soft Pink)
+Success: #34D399 (Green)
+Warning: #FBBF24 (Yellow)
+Danger: #F87171 (Red)
+
+Background: #F9FAFB
+Card: #FFFFFF
+Text: #1F2937
+Subtext: #6B7280
+
+Design guidelines:
+- Rounded corners (rounded-xl or rounded-2xl)
+- Soft shadows
+- Clean spacing
+- Card-based layout
+- Mobile-first responsive design
+
+-----------------------------------
+PAGES REQUIRED
+-----------------------------------
+
+Create these pages:
+- Home / Landing Page
+- Login / Signup
+- Dashboard
+- Tracker
+- Symptom Checker
+- Period Tracker
+- Reports
+- Chatbot
+- Profile
+
+-----------------------------------
+RESPONSIVENESS
+-----------------------------------
+- Fully responsive design
+- Mobile-friendly layout
+- Bottom navigation for mobile
+
+-----------------------------------
+FINAL OUTPUT
+-----------------------------------
+- Clean folder structure
+- Reusable components
+- Working navigation
+- Connected Firebase backend
+- Functional UI with dummy or real data
+
+-----------------------------------
+
+Start by:
+1. Creating the project structure
+2. Setting up routing
+3. Building the Dashboard UI first

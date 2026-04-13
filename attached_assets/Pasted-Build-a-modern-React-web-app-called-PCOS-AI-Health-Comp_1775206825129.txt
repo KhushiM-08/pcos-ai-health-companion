@@ -1,0 +1,81 @@
+Build a modern React web app called "PCOS AI Health Companion" focused on women's healthcare.
+
+Use a soft, clean, feminine healthcare UI with pastel colors:
+Primary (#7C83FD), Accent Pink (#FBCFE8), Background (#F9FAFB), White cards, rounded corners, soft shadows.
+
+-----------------------------------
+FEATURES
+-----------------------------------
+
+- Authentication (Login/Signup using Firebase)
+- Onboarding (collect age, weight, cycle, symptoms)
+- AI Screening Result (risk level + suggestions)
+
+- Dashboard:
+  - Dynamic Health Score (based on cycle, symptoms, lifestyle, mood)
+  - AI Recommendation Card
+  - Charts (health trends)
+  - Quick Actions
+
+- Daily Tracker:
+  - Water, Exercise, Mood, Symptoms
+  - Save data to Firebase
+
+- Period Tracker:
+  - Calendar UI
+  - Cycle prediction
+  - Irregular cycle detection
+
+- Reports:
+  - Health score trend
+  - Cycle & symptom charts
+  - Weekly/monthly summary
+
+- AI Chatbot:
+  - Answer PCOS questions
+  - Suggest diet, exercise
+
+- Diet & Lifestyle:
+  - Meal plan, workout, yoga
+
+- Alerts System:
+  - Smart alerts (low water, missed cycle, inactivity)
+
+- Profile Page:
+  - User info + stats
+
+-----------------------------------
+TECH
+-----------------------------------
+
+- React + Tailwind CSS
+- Firebase (Auth + Firestore)
+- Recharts (charts)
+
+-----------------------------------
+UX REQUIREMENTS
+-----------------------------------
+
+- Clean card-based layout
+- Feminine healthcare design
+- Responsive (mobile + desktop)
+- Sidebar (desktop) + Bottom nav (mobile)
+- Show next-step guidance for user
+
+-----------------------------------
+DATA
+-----------------------------------
+
+- Store all logs, cycles, and reports in Firebase
+- Dashboard updates in real-time
+
+-----------------------------------
+FLOW
+-----------------------------------
+
+Landing → Login → Onboarding → Screening → Dashboard → 
+Tracker / Reports / Chatbot → Continuous improvement loop
+
+-----------------------------------
+
+Start by building Dashboard UI and routing, then implement features step-by-step.

@@ -1,0 +1,215 @@
+Build a modern React web app called "PCOS AI Health Companion" focused on women's healthcare.
+
+The app should help users track PCOS/PCOD health, get AI-based recommendations, follow affordable Indian diet plans, and monitor improvement over time.
+
+-----------------------------------
+CORE FEATURES
+-----------------------------------
+
+1. Authentication (Firebase)
+- Signup/Login using email/password
+- Redirect to Dashboard after login
+- Protect all private routes
+
+-----------------------------------
+
+2. User Onboarding
+- Collect:
+  age, weight, height, cycle regularity, symptoms
+- Multi-step form with progress bar
+
+-----------------------------------
+
+3. Dashboard
+- Health Score (0–100, dynamic)
+- AI Recommendation Card
+- Quick Actions (Tracker, Symptoms)
+- Charts (health trends)
+- Daily summary
+
+-----------------------------------
+
+4. Daily Tracker
+- Track:
+  water intake
+  exercise
+  mood (happy, neutral, sad)
+  symptoms
+- Save data to Firebase Firestore
+- Dashboard updates automatically
+
+-----------------------------------
+
+5. Symptom Checker
+- Multi-step form:
+  irregular periods, acne, hair growth, weight gain
+- Output:
+  Risk Level (Low / Medium / High)
+  Suggestions
+
+-----------------------------------
+
+6. Period Tracker
+- Calendar UI
+- Cycle prediction
+- Detect irregular cycles
+
+-----------------------------------
+
+7. Reports & Analytics
+- Charts using Recharts:
+  health score trend
+  cycle trend
+  symptoms
+- Weekly & Monthly summaries
+
+-----------------------------------
+
+8. AI Recommendation System
+- Rule-based AI:
+  low water → suggest hydration
+  low activity → suggest exercise
+  sad mood → suggest meditation
+- Show daily personalized suggestions
+
+-----------------------------------
+
+9. AI Chatbot
+- Chat UI
+- Answer questions about:
+  PCOS, diet, exercise, lifestyle
+- Provide simple health guidance
+
+-----------------------------------
+
+10. Doctor Consultation Page
+- List doctors:
+  name, specialization, experience
+- Book appointment:
+  date, time, reason
+- Show confirmation
+
+-----------------------------------
+
+11. Information Blog Page (PCOS Guide)
+Sections:
+- What is PCOS
+- What is PCOD
+- Difference between PCOS and PCOD
+- Symptoms
+- Causes
+- When to consult doctor
+- Lifestyle tips
+
+-----------------------------------
+
+12. Diet & Lifestyle Page (IMPORTANT)
+Title: "Affordable Indian Vegan Diet for PCOS"
+
+Include simple, low-cost Indian foods:
+
+Breakfast:
+- Poha
+- Upma
+- Oats
+- Sprouts
+- Besan chilla
+
+Lunch:
+- Roti + sabzi
+- Dal + rice
+- Chana / rajma
+- Salad
+
+Dinner:
+- Khichdi
+- Light roti + sabzi
+- Vegetable soup
+
+Snacks:
+- Roasted chana
+- Peanuts
+- Fruits (banana, apple, guava)
+
+Drinks:
+- Water (2–3L)
+- Lemon water
+- Herbal tea
+
+Also include:
+- Foods to avoid:
+  sugar, junk food, fried food, soft drinks
+
+UI:
+- Meal cards (Breakfast / Lunch / Dinner)
+- Clean and simple layout
+
+-----------------------------------
+
+13. Alerts System
+- Show alerts:
+  low water intake
+  missed cycle
+  no activity
+
+-----------------------------------
+
+14. Profile Page
+- User info
+- Health stats
+- Edit profile
+
+-----------------------------------
+
+TECH STACK
+-----------------------------------
+
+- React (frontend)
+- Firebase (Auth + Firestore)
+- Tailwind CSS
+- Recharts
+
+-----------------------------------
+
+UI / UX DESIGN
+-----------------------------------
+
+Use soft feminine healthcare design:
+
+Colors:
+Primary: #7C83FD
+Accent: #FBCFE8
+Background: #F9FAFB
+Cards: white with soft shadows
+
+Design:
+- Glassmorphism cards (blur + transparency)
+- Rounded corners (2xl)
+- Gradient background (pink → indigo)
+- Clean spacing
+- Card-based layout
+
+-----------------------------------
+
+RESPONSIVENESS
+-----------------------------------
+
+- Mobile-first design
+- Sidebar (desktop)
+- Bottom navigation (mobile)
+
+-----------------------------------
+
+USER FLOW
+-----------------------------------
+
+Landing → Login → Onboarding → Screening → Dashboard → 
+Tracker / Reports / Chatbot → Continuous improvement loop
+
+-----------------------------------
+
+Start by:
+1. Creating project structure
+2. Setting up routing
+3. Building Dashboard UI first
+4. Then implement features step-by-step

@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "PCOS AI Health Companion"
+version = "1.0.0"
+id = "artifacts/pcos-companion"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23979
+
+[services.development]
+run = "pnpm --filter @workspace/pcos-companion run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pcos-companion", "run", "build" ]
+publicDir = "artifacts/pcos-companion/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23979"
+BASE_PATH = "/"
